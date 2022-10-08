@@ -10,7 +10,7 @@ mongoose.connect(mogoUrl)
  
 require('./models');
  
-const requireTokenAdmin = require('./requireTokenAdmin');
+ 
 
  
 
@@ -48,7 +48,7 @@ app.get('/',(req,res)=>{
 
 
 
-app.get('/getadmindata',requireTokenAdmin,(req,res)=>{
+app.get('/getadmindata',(req,res)=>{
     res.send(
         {
             email:req.user.email,

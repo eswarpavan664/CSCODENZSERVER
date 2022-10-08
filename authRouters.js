@@ -53,20 +53,24 @@ router.post('/AdminSignup',async (req,res)=>{
 router.post('/AdminSignin',async (req,res)=>{
   const {email,password} = req.body
   if(!email || !password){
-      return res.status(422).send({error :"must provide email or password"})
+       res.send({"Status":"NO"})
   }
   const user = await AdminUser.findOne({email})
+
   if(!user){
-      return res.status(422).send({error :"must provide email or password"})
+       res.send({"Status":"NO"})
   }
-  try{
-    await user.comparePassword(password);    
-    const token = jwt.sign({userId:user._id},jwtkey)
-    res.send({token})
-  }catch(err){
-      return res.status(422).send({error :"must provide email or password"})
+  else{
+      AdminUser.find({email:email,password:password},(err, docs) => {
+        if (docs.length>0) {
+            res.send(docs);
+           
+        } else {
+          res.send({"Status":"NO"})
+        }
+      });
   }
-  
+
 
 
 })
