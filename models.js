@@ -72,8 +72,102 @@ const AdminUserSchema = new mongoose.Schema({
 
 
  
+const CourseSchema = new mongoose.Schema({
+    CourseName:{
+        type:String,
+        required:true
+    },
+    CoursePhoto:{
+        type:String,
+        required:true
+    },
+    CourseDate:{
+        type:String,
+        required:true
+    },
+    CourseTime:{
+        type:String,
+        required:true
+    },
+    CourseDuration:{
+        type:String,
+        required:true
+    },
+    CoursePrice:{
+        type:String,
+        required:true
+    },
+    CourseId:{
+        type:String,
+        required:true
+    },
+    CourseDiscription:{
+        type:String,
+        required:true
+    },
+    CourseTopics:{
+        type:String,
+        required:true
+    },
 
- 
+})
+
+
+
+const EnrollSchema = new mongoose.Schema({
+
+    StudentName:{
+        type:String,
+        required:true
+    },
+    ContactNumber:{
+        type:String,
+        required:true
+    },
+    StudentId:{
+        type:String,
+        required:true
+    },
+    CourseName:{
+        type:String,
+        required:true
+    },
+    CoursePhoto:{
+        type:String,
+        required:true
+    },
+    CourseDuration:{
+        type:String,
+        required:true
+    },
+    CoursePrice:{
+        type:String,
+        required:true
+    },
+    CourseId:{
+        type:String,
+        required:true
+    },
+    TransactionId:{
+        type:String,
+        required:true
+    },
+    CourseStatus:{
+        type:String,
+        required:true
+    },
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
  
@@ -81,4 +175,10 @@ const AdminUserSchema = new mongoose.Schema({
 mongoose.model('StudentUser',StudentUserSchema);
  
 mongoose.model('AdminUser',AdminUserSchema);
+
+
+
+
+mongoose.model('Courses',CourseSchema);
  
+mongoose.model('enrollCourse',EnrollSchema);
