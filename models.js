@@ -38,7 +38,10 @@ const StudentUserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    Photo:{
+        type:String,
 
+    },
     
 })
 

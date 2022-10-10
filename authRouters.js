@@ -14,12 +14,12 @@ const Courses =mongoose.model('Courses');
 
 router.post('/StudentUserSignupOrSignin',async (req,res)=>{
    
-    const {email,password,Name,PhoneNumber,collegeId,Role,CollegeName,UserId} = req.body;
+    const {email,password,Name,PhoneNumber,CollegeId,Role,CollegeName,UserId,Photo} = req.body;
     const user = await StudentUser.findOne({email})
      
 
         if(!user){
-        const user = new StudentUser({email,password,Name,PhoneNumber,collegeId,Role,CollegeName,UserId});
+        const user = new StudentUser({email,password,Name,PhoneNumber,CollegeId,Role,CollegeName,UserId,Photo});
           user.save();
           res.send({"Status":"Logged"})
         }
@@ -94,6 +94,20 @@ router.get('/GetStudent', function(req, res, next) {
   
 });
 
+// Get Admin 
+
+router.get('/GetAdmin', function(req, res, next) {
+  const email=  req.query.email;
+ 
+    AdminUser.find({email:email},(err, docs) => {
+      if (!err) {
+           res.send(docs);
+      } else {
+          console.log('Failed to retrieve the Course List: ' + err);
+      }
+    });
+  
+});
 
 // Add Courses
 
@@ -158,6 +172,44 @@ router.get('/GetEnrolls', function(req, res, next) {
   });
 
 });
+
+
+
+// Update Student Profile Details
+
+router.put('/UpdateUserDetails',async (req,res)=>{
+  const {PhoneNumber,Name,CollegeId,CollegeName,Id} = req.body
+  
+  StudentUser.findByIdAndUpdate(Id,{PhoneNumber:PhoneNumber,Name:Name,CollegeId:CollegeId,CollegeName:CollegeName },{useFindAndModify:false})
+  .then(data=>{
+    res.send(data);
+  })
+  .catch(err=>{
+     console.log("error");
+  })
+})
+
+
+
+router.post('/PlaceEnrollment',async (req,res)=>{
+     
+  const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus} = req.body
+   
+  const transid =Enroll.findOne({TransactionId});
+  if(!transid){
+    const course = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus});
+    await  course.save();
+    res.send({"Status":"Done"});
+    
+  }
+  else{
+    res.send({"Status":"No"})
+    console.log(transid);
+  }
+ 
+  console.log(StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus);
+  
+})
 
 
 module.exports = router

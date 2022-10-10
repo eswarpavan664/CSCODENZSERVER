@@ -47,17 +47,6 @@ app.get('/',(req,res)=>{
  
 
 
-
-app.get('/getadmindata',(req,res)=>{
-    res.send(
-        {
-            email:req.user.email,
-            Name:req.user.Name,
-            PhoneNumber:req.user.PhoneNumber,
-            Role:req.user.Role
-             
-        })
-})
  
  
 
