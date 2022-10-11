@@ -127,6 +127,10 @@ const EnrollSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    StudentEmailId:{
+        type:String,
+        required:true
+    },
     StudentId:{
         type:String,
         required:true
@@ -158,6 +162,15 @@ const EnrollSchema = new mongoose.Schema({
     CourseStatus:{
         type:String,
         required:true
+    },
+    Date:{
+        type:String,
+        required:true
+    },
+    EnrollmentId:{
+        type:String,
+        required:true
+
     },
 })
 

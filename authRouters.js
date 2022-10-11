@@ -127,12 +127,12 @@ router.post('/AddCourses',async (req,res)=>{
 
 router.post('/EnrollCourses',async (req,res)=>{
      
-  const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus} = req.body
+  const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId} = req.body
    
   const user = await Enroll.findOne({TransactionId})
 
    if(!user){
-          const enroll = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus});
+          const enroll = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId});
           await  enroll.save();
           res.send({"Status":"Done"});
     }
@@ -156,6 +156,26 @@ router.get('/GetCourses', function(req, res, next) {
     });
   
 });
+
+
+
+// Get Courses by User
+
+router.get('/GetCoursesByUser', function(req, res, next) {
+   
+  const id =req.query.id;
+
+  Enroll.find({StudentEmailId:id},(err, docs) => {
+    if (!err) {
+         res.send(docs);
+    } else {
+        console.log('Failed to retrieve the Course List: ' + err);
+    }
+  });
+
+});
+
+
 
 //Get Enrolls
 
@@ -195,17 +215,12 @@ router.post('/PlaceEnrollment',async (req,res)=>{
      
   const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus} = req.body
    
-  const transid =Enroll.findOne({TransactionId});
-  if(!transid){
+   
     const course = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus});
     await  course.save();
     res.send({"Status":"Done"});
     
-  }
-  else{
-    res.send({"Status":"No"})
-    console.log(transid);
-  }
+  
  
   console.log(StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus);
   
