@@ -227,4 +227,53 @@ router.post('/PlaceEnrollment',async (req,res)=>{
 })
 
 
+
+
+// Update Student Application Status Details
+
+router.put('/UpdateApplicationStatus',async (req,res)=>{
+  const {Status,Id} = req.body
+  
+  Enroll.findByIdAndUpdate(Id,{CourseStatus:Status},{useFindAndModify:false})
+  .then(data=>{
+    res.send(data);
+  })
+  .catch(err=>{
+     console.log("error");
+  })
+})
+
+
+
+
+
+
+//Get Enrolls
+
+router.get('/GetEnrollsForAdmin', function(req, res, next) {
+  
+  const status=req.query.status;
+  const tran=req.query.Tran;
+  if(tran===""){
+    Enroll.find({CourseStatus:status},(err, docs) => {
+      if (!err) {
+           res.send(docs);
+      } else {
+          console.log('Failed to retrieve the Course List: ' + err);
+      }
+    });
+  }
+  else{
+    Enroll.find({CourseStatus:status,TransactionId:tran},(err, docs) => {
+      if (!err) {
+           res.send(docs);
+      } else {
+          console.log('Failed to retrieve the Course List: ' + err);
+      }
+    });
+  }
+
+});
+
+
 module.exports = router
