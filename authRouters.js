@@ -48,7 +48,7 @@ router.post('/AdminSignup',async (req,res)=>{
   }catch(err){
     return res.status(422).send(err.message)
   }
-  
+  console.log("hi");
   
 })
 
