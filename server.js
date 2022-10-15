@@ -46,7 +46,18 @@ app.get('/',(req,res)=>{
 })
  
 
+app.get('/sendOrderAsSms',async (req,res)=>{
+    const orderid = req.query.OrderId ;
+    const customername = req.query.CustomerName ;
+    const phonenumber = req.query.PhoneNumber ;
+   var options = {authorization :'ul5V2dpBCiEz01rOck739GoyHKIZfmbwXhtnevLW4JFDMRUq8YFLZeUPJW23qOaY5R8CjcVsTE6rxIzG' , message : 'Customer:- '+customername+'\t Mobile No:-'+phonenumber+' with Order Id:-'+orderid ,  numbers : ['7993031882']} 
+    const response = await fast2sms.sendMessage(options)
+ 
+     res.send(response)
+     console.log(orderid,customername,phonenumber);
+     console.log("hii")
 
+})
  
  
 
