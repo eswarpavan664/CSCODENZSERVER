@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const cors = require("cors");
- 
+const fast2sms = require('fast-two-sms')
 const {mogoUrl} = require('./keys');
 mongoose.connect(mogoUrl)
  
