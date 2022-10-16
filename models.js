@@ -125,11 +125,18 @@ const EnrollSchema = new mongoose.Schema({
     },
     ContactNumber:{
         type:String,
-        required:true
+    
     },
     StudentEmailId:{
         type:String,
         required:true
+    },
+    CollegeId:{
+        type:String,
+        
+    },
+    CollegeName:{
+        type:String,
     },
     StudentId:{
         type:String,
@@ -139,6 +146,7 @@ const EnrollSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+   
     CoursePhoto:{
         type:String,
         required:true

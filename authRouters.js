@@ -138,12 +138,12 @@ router.post('/AddCourses',async (req,res)=>{
 
 router.post('/EnrollCourses',async (req,res)=>{
      
-  const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId} = req.body
+  const {CollegeName,CollegeId,StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId} = req.body
    
   const user = await Enroll.findOne({TransactionId})
 
    if(!user){
-          const enroll = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId});
+          const enroll = new Enroll({CollegeName,CollegeId,StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId});
           await  enroll.save();
           res.send({"Status":"Done"});
     }
