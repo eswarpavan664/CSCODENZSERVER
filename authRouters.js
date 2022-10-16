@@ -115,9 +115,20 @@ router.post('/AddCourses',async (req,res)=>{
      
   const {CourseName,CoursePhoto,CourseDate,CourseTime,CourseDuration,CoursePrice,CourseId,CourseDiscription,CourseTopics} = req.body
    
-  const course = new Courses({CourseName,CoursePhoto,CourseDate,CourseTime,CourseDuration,CoursePrice,CourseId,CourseDiscription,CourseTopics});
-  await  course.save();
-  res.send({"Status":"Done"});
+   
+
+
+  try{
+    const course = new Courses({CourseName,CoursePhoto,CourseDate,CourseTime,CourseDuration,CoursePrice,CourseId,CourseDiscription,CourseTopics});
+
+    await  course.save();
+    res.send({"Status":"Done"});
+
+  }catch(err){
+    return res.status(422).send(err.message)
+  }
+
+ 
 })
 
 
