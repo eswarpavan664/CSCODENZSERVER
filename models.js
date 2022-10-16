@@ -171,9 +171,12 @@ const EnrollSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    Date:{
+    CourseStartDate:{
         type:String,
         required:true
+    },
+    CourseEndDate:{
+        type:String,
     },
     EnrollmentId:{
         type:String,

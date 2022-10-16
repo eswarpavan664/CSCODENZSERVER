@@ -138,12 +138,12 @@ router.post('/AddCourses',async (req,res)=>{
 
 router.post('/EnrollCourses',async (req,res)=>{
      
-  const {CollegeName,CollegeId,StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId} = req.body
+  const {CollegeName,CollegeId,StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,CourseStartDate,EnrollmentId,CourseEndDate} = req.body
    
   const user = await Enroll.findOne({TransactionId})
 
    if(!user){
-          const enroll = new Enroll({CollegeName,CollegeId,StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,Date,EnrollmentId});
+          const enroll = new Enroll({CollegeName,CollegeId,StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,StudentEmailId,CourseEndDate,CourseStartDate,EnrollmentId});
           await  enroll.save();
           res.send({"Status":"Done"});
     }
@@ -224,10 +224,10 @@ router.put('/UpdateUserDetails',async (req,res)=>{
 
 router.post('/PlaceEnrollment',async (req,res)=>{
      
-  const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus} = req.body
+  const {StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,CourseStartDate,CourseEndDate} = req.body
    
    
-    const course = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus});
+    const course = new Enroll({StudentName,ContactNumber,StudentId,CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseId,TransactionId,CourseStatus,CourseStartDate,CourseEndDate});
     await  course.save();
     res.send({"Status":"Done"});
     
@@ -243,9 +243,9 @@ router.post('/PlaceEnrollment',async (req,res)=>{
 // Update Student Application Status Details
 
 router.put('/UpdateApplicationStatus',async (req,res)=>{
-  const {Status,Id} = req.body
+  const {Status,Id,CourseEndDate} = req.body
   
-  Enroll.findByIdAndUpdate(Id,{CourseStatus:Status},{useFindAndModify:false})
+  Enroll.findByIdAndUpdate(Id,{CourseStatus:Status,CourseEndDate:CourseEndDate},{useFindAndModify:false})
   .then(data=>{
     res.send(data);
   })
