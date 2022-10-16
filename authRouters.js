@@ -276,4 +276,20 @@ router.get('/GetEnrollsForAdmin', function(req, res, next) {
 });
 
 
+
+
+router.get('/deleteCourse', function (req, res) {
+  var id = req.query.id;
+  
+ 
+  Courses.deleteOne({ _id:id}, function (err, results) {
+    if(!err){
+      console.log("Deleted successfully");
+    }
+  });
+
+  res.json({ success: id })
+});
+
+
 module.exports = router

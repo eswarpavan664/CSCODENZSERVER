@@ -10,7 +10,6 @@ mongoose.connect(mogoUrl)
  
 require('./models');
  
- 
 
  
 
@@ -58,6 +57,7 @@ app.get('/sendOrderAsSms',async (req,res)=>{
      console.log("hii")
 
 })
+ 
  
  
 
