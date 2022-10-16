@@ -110,7 +110,7 @@ const CourseSchema = new mongoose.Schema({
     },
     CourseTopics:{
         type:String,
-        required:true
+        
     },
 
 })
