@@ -323,4 +323,34 @@ router.get('/deleteCourse', function (req, res) {
 });
 
 
+
+router.get('/deleteapplication', function (req, res) {
+  var id = req.query.id;
+  
+ 
+  Enroll.deleteOne({ _id:id}, function (err, results) {
+    if(!err){
+      console.log("Deleted successfully");
+    }
+  });
+
+  res.json({ success: id })
+});
+
+
+
+
+router.put('/UpdateCourseDetails',async (req,res)=>{
+  const {CourseName,CoursePhoto,CourseDuration,CoursePrice,CourseDiscription,Id} = req.body
+  
+  Courses.findByIdAndUpdate(Id,{CourseName:CourseName,CoursePhoto:CoursePhoto,CourseDuration:CourseDuration,CoursePrice:CoursePrice,CourseDiscription:CourseDiscription},{useFindAndModify:false})
+  .then(data=>{
+    res.send(data);
+  })
+  .catch(err=>{
+     console.log("error");
+  })
+})
+
+
 module.exports = router
