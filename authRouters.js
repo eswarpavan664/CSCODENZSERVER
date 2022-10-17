@@ -206,6 +206,26 @@ router.get('/GetEnrolls', function(req, res, next) {
 
 
 
+// 
+
+
+router.get('/GetEnrollsForAnalysis', function(req, res, next) {
+  
+  const id =req.query.id;
+  const status =req.query.status;
+   
+  Enroll.find({CourseId:id,CourseStatus:status},(err, docs) => {
+    if (!err) {
+         res.send(docs);
+    } else {
+        console.log('Failed to retrieve the Course List: ' + err);
+    }
+  });
+console.log(status)
+});
+
+
+
 // Update Student Profile Details
 
 router.put('/UpdateUserDetails',async (req,res)=>{
