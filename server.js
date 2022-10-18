@@ -10,6 +10,17 @@ mongoose.connect(mogoUrl)
  
 require('./models');
  
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'itonystark58@gmail.com',
+    pass: 'zjzacbjjnvmbhtzh'
+  }
+});
+
+ 
 
  
 
@@ -43,6 +54,19 @@ app.get('/',(req,res)=>{
     res.send("Working");
 
 })
+
+
+
+
+
+/*
+
+zjzacbjjnvmbhtzh
+
+*/
+
+
+
  
 
 app.get('/sendOrderAsSms',async (req,res)=>{
@@ -53,9 +77,33 @@ app.get('/sendOrderAsSms',async (req,res)=>{
     const response = await fast2sms.sendMessage(options)
  
      res.send(response)
-     console.log(orderid,customername,phonenumber);
-     console.log("hii")
+    // console.log(orderid,customername,phonenumber);
+    
 
+})
+
+
+
+
+app.get('/sendgmail',(req,res)=>{
+
+    const msg=req.query.msg;
+    const gmail =req.query.gmail;
+
+    var mailOptions = {
+        from: 'eswaraaa8@gmail.com',
+        to: gmail,
+        subject: 'CS CODENZ',
+        text: msg
+      };
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            res.send({"status":"No"});
+        } else {
+          res.send({"status":"Done"});
+        }
+      });
+       
 })
  
  
