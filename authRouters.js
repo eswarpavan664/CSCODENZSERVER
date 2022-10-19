@@ -151,6 +151,7 @@ router.post('/EnrollCourses',async (req,res)=>{
       
       res.send({"Status":"No"});
     }   
+    console.log("done");
 })
 
 
