@@ -15,8 +15,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'itonystark58@gmail.com',
-    pass: 'zjzacbjjnvmbhtzh'
+    user: 'cscodenzofficial20@gmail.com',
+    pass: 'tlfpgphzisjeslbv'
   }
 });
 
@@ -91,10 +91,16 @@ app.get('/sendgmail',(req,res)=>{
     const gmail =req.query.gmail;
 
     var mailOptions = {
-        from: 'eswaraaa8@gmail.com',
+        from: 'cscodenzofficial20@gmail.com',
         to: gmail,
-        subject: 'CS CODENZ',
-        text: msg
+        subject: 'CS CODENZ Educational Society',
+        text:`
+            ${msg}
+
+
+            
+        Website URL:www.cscodenz.org
+        `
       };
     transporter.sendMail(mailOptions, function(error, info){
         if (error) {
