@@ -206,6 +206,19 @@ router.get('/GetEnrolls', function(req, res, next) {
 });
 
 
+router.get('/GetAllEnrollsByCourse', function(req, res, next) {
+  
+  const id =req.query.id;
+   
+  Enroll.find({CourseId:id},(err, docs) => {
+    if (!err) {
+         res.send(docs);
+    } else {
+        console.log('Failed to retrieve the Course List: ' + err);
+    }
+  });
+
+});
 
 // 
 
